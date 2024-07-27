@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="zibayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="family" Type="nvarchar" MaxLength="50" />
+    <Property Name="fhone" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="frosh">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_costumer" Type="int" />
+    <Property Name="id_kala" Type="int" />
+    <Property Name="date_frokhte" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="kala">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code_kala" Type="bigint" />
+    <Property Name="name_kala" Type="nvarchar" MaxLength="50" />
+    <Property Name="date_e" Type="nvarchar" MaxLength="50" />
+    <Property Name="mark" Type="nvarchar" MaxLength="50" />
+    <Property Name="mony" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_frosh_customer">
+    <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+    <End Role="frosh" Type="Self.frosh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="frosh">
+        <PropertyRef Name="id_costumer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_frosh_kala">
+    <End Role="kala" Type="Self.kala" Multiplicity="0..1" />
+    <End Role="frosh" Type="Self.frosh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kala">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="frosh">
+        <PropertyRef Name="id_kala" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="zibayModelStoreContainer">
+    <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="frosh" EntityType="Self.frosh" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="kala" EntityType="Self.kala" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_frosh_customer" Association="Self.FK_frosh_customer">
+      <End Role="customer" EntitySet="customer" />
+      <End Role="frosh" EntitySet="frosh" />
+    </AssociationSet>
+    <AssociationSet Name="FK_frosh_kala" Association="Self.FK_frosh_kala">
+      <End Role="kala" EntitySet="kala" />
+      <End Role="frosh" EntitySet="frosh" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

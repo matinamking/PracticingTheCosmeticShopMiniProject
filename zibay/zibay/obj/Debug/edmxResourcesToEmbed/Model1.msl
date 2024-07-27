@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="zibayModelStoreContainer" CdmEntityContainer="zibayEntities">
+    <EntitySetMapping Name="customers">
+      <EntityTypeMapping TypeName="zibayModel.customer">
+        <MappingFragment StoreEntitySet="customer">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="family" ColumnName="family" />
+          <ScalarProperty Name="fhone" ColumnName="fhone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="froshes">
+      <EntityTypeMapping TypeName="zibayModel.frosh">
+        <MappingFragment StoreEntitySet="frosh">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="id_costumer" ColumnName="id_costumer" />
+          <ScalarProperty Name="id_kala" ColumnName="id_kala" />
+          <ScalarProperty Name="date_frokhte" ColumnName="date_frokhte" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="kalas">
+      <EntityTypeMapping TypeName="zibayModel.kala">
+        <MappingFragment StoreEntitySet="kala">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="code_kala" ColumnName="code_kala" />
+          <ScalarProperty Name="name_kala" ColumnName="name_kala" />
+          <ScalarProperty Name="date_e" ColumnName="date_e" />
+          <ScalarProperty Name="mark" ColumnName="mark" />
+          <ScalarProperty Name="mony" ColumnName="mony" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="zibayModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

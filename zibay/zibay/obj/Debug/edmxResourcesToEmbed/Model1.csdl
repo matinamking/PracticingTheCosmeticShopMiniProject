@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="zibayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="family" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="froshes" Relationship="Self.FK_frosh_customer" FromRole="customer" ToRole="frosh" />
+  </EntityType>
+  <EntityType Name="frosh">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_costumer" Type="Int32" />
+    <Property Name="id_kala" Type="Int32" />
+    <Property Name="date_frokhte" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="customer" Relationship="Self.FK_frosh_customer" FromRole="frosh" ToRole="customer" />
+    <NavigationProperty Name="kala" Relationship="Self.FK_frosh_kala" FromRole="frosh" ToRole="kala" />
+  </EntityType>
+  <EntityType Name="kala">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code_kala" Type="Int64" />
+    <Property Name="name_kala" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_e" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="mark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="mony" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="froshes" Relationship="Self.FK_frosh_kala" FromRole="kala" ToRole="frosh" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_frosh_customer">
+    <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+    <End Role="frosh" Type="Self.frosh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="frosh">
+        <PropertyRef Name="id_costumer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_frosh_kala">
+    <End Role="kala" Type="Self.kala" Multiplicity="0..1" />
+    <End Role="frosh" Type="Self.frosh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kala">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="frosh">
+        <PropertyRef Name="id_kala" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="zibayEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="customers" EntityType="Self.customer" />
+    <EntitySet Name="froshes" EntityType="Self.frosh" />
+    <EntitySet Name="kalas" EntityType="Self.kala" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_frosh_customer" Association="Self.FK_frosh_customer">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="frosh" EntitySet="froshes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_frosh_kala" Association="Self.FK_frosh_kala">
+      <End Role="kala" EntitySet="kalas" />
+      <End Role="frosh" EntitySet="froshes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
